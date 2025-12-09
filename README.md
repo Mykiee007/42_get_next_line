@@ -1,6 +1,8 @@
 *This project has been created as part of the 42 curriculum by mvelasqu*
 
-DESCRIPTION
+#get_next_line
+
+## DESCRIPTION
 | **SPECIFICATION** | **DETAILS** |
 |:-----|:-----|
 |**Turn in files:** | *get_next_line.c, get_next_line_utils.c, get_next_line.h* |
@@ -9,10 +11,10 @@ DESCRIPTION
 |**External Functions:** | read, malloc, free |
 |**Description:** | Write a function that returns a line read from a file descriptor |
 
-INSTRUCTIONS
+## INSTRUCTIONS
 
-RESOURCES
-- 
+## RESOURCES
+ 
 - Readme.md - [makeareadme.com](https://www.makeareadme.com/), [geeksforgeeks.org](https://www.geeksforgeeks.org/git/what-is-readme-md-file/);
 
 ADDITIONAL SECTIONS MAY BE REQUIRED DEPENDING ON THE PROJECT
