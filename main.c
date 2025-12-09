@@ -6,9 +6,11 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 11:37:49 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/09 14:43:59 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/09 15:01:18 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// This main is for testing only, it is not included in the files to be submitted.
 
 #include "get_next_line.h"
 
