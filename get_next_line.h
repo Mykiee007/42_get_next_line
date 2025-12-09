@@ -6,7 +6,7 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:56:57 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/09 11:38:48 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/09 15:12:53 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 void	ft_bzero(void *src, size_t n);
 void	*ft_calloc(size_t count, size_t n);
+char	*get_next_line(int fd);
 
 #endif
 
