@@ -1,6 +1,6 @@
 #Variables
 
-NAME = get_next_line.a
+NAME = test
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar

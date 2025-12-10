@@ -6,7 +6,7 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:55:47 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/09 16:18:32 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:16:41 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 char *get_next_line(int fd)
 {
-	int src;
-	int cnt;
+	static t_list *head; // my pointer to my t_list
 	char *buff;
-	
-	buff = (char *)ft_calloc(100, sizeof(char));
-	if (buff == NULL)
-		return (NULL);
-	cnt = 10;
-	src = read(fd, buff, cnt);
+
+	if (head == NULL)
+	{	
+		head = ft_lstnew(fd);
+	} 
+	else if (ft_fdchecker(head,fd)) // 1 if there is already, 0 if fd is not there
+	{
+
+	}
+
+
 	return (buff);
 }	
