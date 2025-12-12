@@ -6,70 +6,86 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 11:37:49 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/11 16:02:49 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:43:58 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // This main is for testing only, it is not included in the files to be submitted.
 #include <stdio.h>
 #include <stdlib.h>
-//#include "get_next_line.h"
+#include "get_next_line.h"
 
-size_t	ft_strlen(char const *src)
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "get_next_line.h"
+
+int	main(int argc, char **argv)
 {
-	size_t	i;
+	int		fd[4];
+	char	*line;
+	int		choice;
+	int		i;
 
-	i = 0;
-	while (src[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
+	if (argc != 5)
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
+		printf("Usage: %s file1 file2 file3 file4\n", argv[0]);
+		return (1);
+	}
+
+	i = 0;
+	while (i < 4)
+	{
+		fd[i] = open(argv[i + 1], O_RDONLY);
+		if (fd[i] < 0)
+		{
+			perror("open");
+			return (1);
+		}
 		i++;
 	}
-	if (s[i] == (char)c)
-		return ((char *)&s[i]);
+
+	printf("\nFiles opened:\n");
+	printf("1 → %s\n", argv[1]);
+	printf("2 → %s\n", argv[2]);
+	printf("3 → %s\n", argv[3]);
+	printf("4 → %s\n\n", argv[4]);
+
+	while (1)
+	{
+		printf("Choose fd (1-4) or 0 to exit: ");
+		if (scanf("%d", &choice) != 1)
+			break;
+		if (choice == 0)
+			break;
+		if (choice < 1 || choice > 4)
+		{
+			printf("Invalid choice\n");
+			continue;
+		}
+
+		line = get_next_line(fd[choice - 1]);
+		if (!line)
+		{
+			printf("[EOF on fd %d]\n", choice);
+			continue;
+		}
+
+		printf("fd %d → %s", choice, line);
+		free(line);
+	}
+
+	i = 0;
+	while (i < 4)
+	{
+		close(fd[i]);
+		i++;
+	}
+
 	return (0);
 }
 
-char *ft_extract_line(const char *s, int c)
-{
-	int i;
-	int len;
-	char *line;
 
-	i = 0;
-	while (s[i] != (char) c && s[i] != '\0')
-		i++;
-	len = i;
-	if (s[i] == (char) c)
-		len++;
-	line = (char *)malloc((len + 1) * sizeof(char));
-	if (line == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i] != (char) c && s[i] != '\0')
-	{
-		line[i] = s[i];
-		i++;
-	}
-	if (s[i] == (char)c)
-    {
-        line[i] = s[i];
-        i++;
-    }
-	line[i] = '\0';
-	return (line);
-}
 
 //char *ft_extract_rest(const char *s, int c)
 //{
@@ -104,34 +120,8 @@ char *ft_extract_line(const char *s, int c)
 //	return (leftover);
 //}
 
-char *my_extract_rest(const char *s, int c)
-{
-	int i;
-	char *buf;
-	int len;
-	char *leftover;
-	
-	if (!s || s[0] == '\0')
-		return (NULL);
-	buf = ft_strchr(s, c);
-	if (!buf || buf[1] == '\0')
-        return (NULL);
-	len = ft_strlen(buf);
-	if (len == 0)
-		return (NULL);
-	leftover = (char *)malloc((len + 1)*sizeof(char));
-	if (leftover == NULL)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		leftover[i] = buf[i+1];
-		i++;
-	}
-	leftover[len] = '\0';
-	return (leftover);
-}
 
+/*
 int main(void)
 {
 	char *src;
@@ -169,7 +159,7 @@ int main(void)
 //        free(src);
 //    }
 //	printf("%s", src);
-/*	READ #1
+	READ #1
     bytes = read(fd, buf, 9);
     buf[bytes] = '\0';
     printf("READ 1: %s\n", buf);
@@ -188,7 +178,7 @@ int main(void)
     bytes = read(fd, buf, 5);
     buf[bytes] = '\0';
     printf("READ 4: %s\n", buf);
-*/
+
 //    close(fd);
 	return (0);
-}
+}*/

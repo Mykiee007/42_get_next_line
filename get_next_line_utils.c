@@ -6,7 +6,7 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:56:28 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/11 16:18:32 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:42:11 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 t_list	*ft_lstnew(int file_d)
 {
 	t_list	*node;
-	char	*src;
 
-	node = (t_list *)malloc(sizeof(t_list));
+	node = malloc(sizeof(t_list));
 	if (node == NULL)
 		return (NULL);
-	node -> fd = file_d;
-	node -> content = "";
-	node -> next = NULL;
+	node->fd = file_d;
+	node->content = ft_strdup("");
+	if (!node->content)
+	{
+		free(node);
+		return (NULL);
+	}
+	node->next = NULL;
 	return (node);
 }
 
@@ -43,17 +47,24 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	last->next = new;
 }
 
-int		ft_fdchecker(t_list *lst, int fd)
+char	*ft_strdup(const char *s)
 {
 	int		i;
-	
-	while (lst->next != NULL)
+	int		length;
+	char	*p;
+
+	length = ft_strlen(s) + 1;
+	p = (char *)malloc(length * sizeof(char));
+	if (p == NULL)
+		return (0);
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (lst->fd == fd)
-			return (fd);
-		lst = lst->next;
+		p[i] = s[i];
+		i++;
 	}
-	return (0);
+	p[i] = '\0';
+	return (p);
 }
 
 size_t	ft_strlen(char const *src)
