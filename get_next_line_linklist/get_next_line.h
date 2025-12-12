@@ -6,7 +6,7 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:56:57 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/12 13:26:55 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:41:10 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <fcntl.h>
 # include <unistd.h>
 
+typedef struct s_list
+{
+	int				fd;
+	char			*content;
+	struct s_list	*next;
+}	t_list;
 char	*ft_extract_rest(const char *s, int c);
 char	*ft_extract_line(const char *s, int c);
 t_list	*ft_lstnew(int file_d);

@@ -6,11 +6,46 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:56:28 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/12 13:26:50 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:42:11 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+t_list	*ft_lstnew(int file_d)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	if (node == NULL)
+		return (NULL);
+	node->fd = file_d;
+	node->content = ft_strdup("");
+	if (!node->content)
+	{
+		free(node);
+		return (NULL);
+	}
+	node->next = NULL;
+	return (node);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
+
+	if (lst == NULL || new == NULL)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	last = *lst;
+	while (last->next != NULL)
+		last = last->next;
+	last->next = new;
+}
 
 char	*ft_strdup(const char *s)
 {
