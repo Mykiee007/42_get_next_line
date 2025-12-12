@@ -6,7 +6,7 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:55:47 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/12 13:26:52 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:02:31 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*ft_extract_rest(const char *s, int c)
 char	*ft_extract_line(const char *s, int c)
 {
 	int		i;
-	int		len;
 	char	*line;
 
 	if (!s || s[0] == '\0')
@@ -51,10 +50,9 @@ char	*ft_extract_line(const char *s, int c)
 	i = 0;
 	while (s[i] != (char) c && s[i] != '\0')
 		i++;
-	len = i;
 	if (s[i] == (char) c)
-		len++;
-	line = (char *)malloc((len + 1) * sizeof(char));
+		i++;
+	line = (char *)malloc((i + 1) * sizeof(char));
 	if (line == NULL)
 		return (NULL);
 	i = 0;
@@ -64,40 +62,68 @@ char	*ft_extract_line(const char *s, int c)
 		i++;
 	}
 	if (s[i] == (char)c)
-	{
-		line[i] = s[i];
-		i++;
-	}
+		line[i++] = c;
 	line[i] = '\0';
 	return (line);
 }
 
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_getstring(int fd, char *string, int fnd)
 {
-	char	*res;
-	size_t	i;
-	size_t	j;
+	int		byte;
+	char	*buf;
+	char	*temp;
 
-	if (!s1 || !s2)
+	buf = (char *)malloc((size_t)(BUFFER_SIZE + 1));
+	if (buf == NULL)
 		return (NULL);
-	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!res)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-		res[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		res[j++] = s2[i++];
-	res[j] = '\0';
-	return (res);
+	byte = 1;
+	while (byte > 0 && (!string || !ft_strchr(string, fnd)))
+	{
+		byte = read(fd, buf, BUFFER_SIZE);
+		if (byte < 0)
+		{
+			free (buf);
+			free (string);
+			return (NULL);
+		}
+		buf[byte] = '\0';
+		if (byte > 0)
+		{
+			temp = string;
+			string = ft_strjoin(temp, buf);
+			free (temp);
+			if (!string)
+			{
+				free(buf);
+				return (NULL);
+			}
+		}
+	}
+	free(buf);
+	return (string);
 }
-
 
 char	*get_next_line(int fd)
 {
+	static char		*string[1000];
+	char			*line;
+	char			*leftover;
+	char			*temp;
+	int				fnd;
 
+	fnd = '\n';
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	temp = ft_getstring(fd, string[fd], fnd);
+	if (temp == NULL || temp[0] == '\0')
+	{
+		free(temp);
+		string[fd] = NULL;
+		return (NULL);
+	}
+	line = ft_extract_line(temp, fnd);
+	leftover = ft_extract_rest(temp, fnd);
+	free (temp);
+	string[fd] = leftover;
 	return (line);
 }

@@ -6,31 +6,11 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:56:28 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/12 13:26:50 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:01:26 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strdup(const char *s)
-{
-	int		i;
-	int		length;
-	char	*p;
-
-	length = ft_strlen(s) + 1;
-	p = (char *)malloc(length * sizeof(char));
-	if (p == NULL)
-		return (0);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		p[i] = s[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
-}
 
 size_t	ft_strlen(char const *src)
 {
@@ -46,6 +26,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
+	if (s == NULL)
+		return (NULL);
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -56,4 +38,28 @@ char	*ft_strchr(const char *s, int c)
 	if (s[i] == (char)c)
 		return ((char *)&s[i]);
 	return (0);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*res;
+	size_t	i;
+	size_t	j;
+
+	if (!s2)
+		return (NULL);
+	if (!s1)
+		s1 = "";
+	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!res)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		res[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		res[j++] = s2[i++];
+	res[j] = '\0';
+	return (res);
 }
