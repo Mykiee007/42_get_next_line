@@ -6,7 +6,7 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:55:47 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/12 16:02:31 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/12 15:20:52 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,15 @@ char	*ft_extract_line(const char *s, int c)
 char	*ft_getstring(int fd, char *string, int fnd)
 {
 	int		byte;
-	char	*buf;
+	char	buf[BUFFER_SIZE + 1];
 	char	*temp;
 
-	buf = (char *)malloc((size_t)(BUFFER_SIZE + 1));
-	if (buf == NULL)
-		return (NULL);
 	byte = 1;
 	while (byte > 0 && (!string || !ft_strchr(string, fnd)))
 	{
 		byte = read(fd, buf, BUFFER_SIZE);
 		if (byte < 0)
 		{
-			free (buf);
 			free (string);
 			return (NULL);
 		}
@@ -93,13 +89,9 @@ char	*ft_getstring(int fd, char *string, int fnd)
 			string = ft_strjoin(temp, buf);
 			free (temp);
 			if (!string)
-			{
-				free(buf);
 				return (NULL);
-			}
 		}
 	}
-	free(buf);
 	return (string);
 }
 
