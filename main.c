@@ -6,21 +6,17 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 11:37:49 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/12 15:56:12 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/15 15:50:44 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // This main is for testing only, it is not included in the files to be submitted.
-#include <stdio.h>
-#include <stdlib.h>
-#include "get_next_line.h"
-
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "get_next_line.h"
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	int		fd[4];
 	char	*line;
@@ -83,7 +79,7 @@ int	main(int argc, char **argv)
 	}
 
 	return (0);
-}
+}*/
 
 
 
@@ -182,3 +178,22 @@ int main(void)
 //    close(fd);
 	return (0);
 }*/
+
+int main(void)
+{
+    int     fd;
+    char    *line;
+
+    fd = open("sample.txt", O_RDONLY);
+    if (fd < 0)
+        return (1);
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);
+    }
+
+    close(fd);
+    return (0);
+}
