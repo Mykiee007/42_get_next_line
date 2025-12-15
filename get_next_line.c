@@ -6,7 +6,7 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:55:47 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/15 15:31:48 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:01:39 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,12 @@ char	*ft_extract_line(const char *s, int c)
 char	*ft_getstring(int fd, char *stash, int fnd)
 {
 	char	*temp;
-	char	buf[BUFFER_SIZE +1];
+	char	*buf;
 	ssize_t	bytes;
 	
+	buf = malloc(BUFFER_SIZE +1);
+	if (buf == NULL)
+		return (NULL);
 	bytes = 1;
 	while (bytes > 0 && (!stash || !ft_strchr(stash, fnd)))
 	{
@@ -141,6 +144,7 @@ char	*ft_getstring(int fd, char *stash, int fnd)
 				return (NULL);
 		}
 	}
+	free (buf);
 	return (stash);
 }
 
@@ -153,7 +157,7 @@ char	*get_next_line(size_t fd)
 	char		fnd;
 
 	fnd = '\n';
-	if(fd < 0 || BUFFER_SIZE <= 0)
+	if(BUFFER_SIZE <= 0)
 		return (NULL);
 	string = ft_getstring(fd, stash[fd], fnd);
 	if (string == NULL || string[0] == '\0')
