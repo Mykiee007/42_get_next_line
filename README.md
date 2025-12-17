@@ -9,10 +9,11 @@ A function that reads a line from a file descriptor, one line at a time.
 `get_next_line()` returns a line ending with a newline character (`\n`) from a file descriptor.
 If there is nothing left to read, it returns `NULL`.
 
-## INSTRUCTIONS
-
+## Instructions
 
 ### Compilation
+
+Replace `<files>.c` with the project source files.
 
 ```bash
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c
@@ -25,7 +26,7 @@ char *get_next_line(int fd);
 
 ### Main Test
 
-Requires four (4) .txt files to test. 
+Requires four (4) `.txt` files for testing.
 
 ```bash
 // This main is for testing only, it is not included in the files to be submitted.
@@ -100,9 +101,15 @@ int	main(int argc, char **argv)
 }
 ```
 
+### Edge Cases
+- Empty files
+- Files without newline at EOF
+- Very large BUFFER_SIZE values
+- Multiple simultaneous file descriptors
+
 ### Return Value
 - A line read from the file descriptor
-- NULL if EOF is reached r an error occurs
+- NULL if EOF is reached an error occurs
 
 ### NOTES
 - Handles multiple file descriptors
@@ -110,5 +117,8 @@ int	main(int argc, char **argv)
 
 ## RESOURCES
  
-- Readme.md - [makeareadme.com](https://www.makeareadme.com/), [geeksforgeeks.org](https://www.geeksforgeeks.org/git/what-is-readme-md-file/);
+- 42 project subject
+- Linux man pages
+- C input/output concepts
+- Static variables in C
 
