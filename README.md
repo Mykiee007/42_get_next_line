@@ -101,6 +101,22 @@ int	main(int argc, char **argv)
 }
 ```
 
+### Sample Test Files
+
+The following sample files are used to validate the behavior of `get_next_line()`  
+and are **not part of the submission**.
+- sample.txt - Normal multi-line files
+- sample2.txt - Empty file
+- sample3.txt - No New line at EOF
+- sample4.txt - Very Large File Value
+
+### Test Samples
+
+Run code to test using:
+```bash
+./a.out sample.txt sample2.txt sample3.txt sample4.txt
+```
+
 ### Edge Cases
 - Empty files
 - Files without newline at EOF

@@ -6,7 +6,7 @@
 /*   By: mvelasqu <mvelasqu@student.42singapore.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 11:37:49 by mvelasqu          #+#    #+#             */
-/*   Updated: 2025/12/15 15:50:44 by mvelasqu         ###   ########.fr       */
+/*   Updated: 2025/12/17 11:19:33 by mvelasqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include "get_next_line.h"
 
-/*int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		fd[4];
 	char	*line;
@@ -79,7 +79,7 @@
 	}
 
 	return (0);
-}*/
+}
 
 
 
@@ -179,7 +179,7 @@ int main(void)
 	return (0);
 }*/
 
-int main(void)
+/*int main(void)
 {
     int     fd;
     char    *line;
@@ -196,4 +196,4 @@ int main(void)
 
     close(fd);
     return (0);
-}
+}*/
